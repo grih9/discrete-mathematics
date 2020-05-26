@@ -93,22 +93,19 @@ int main() {
 
     if (deg2 > deg1) {
         std::vector<int> q(1, 0);
-        const std::vector<int> & r(polynom1);
 
         std::cout << std::endl;
         std::cout << "RESULT: \n";
         std::cout << "q = " << q[0];
         std::cout << "\np = ";
-        for (size_t i = 0; i < r.size(); ++i) {
-            std::cout << r[i] << "*X" << i;
-            if ((i + 1) < r.size()) {
+        for (size_t i = 0; i < polynom1.size(); ++i) {
+            std::cout << polynom1[i] << "*X^" << i;
+            if ((i + 1) < polynom1.size()) {
                 std::cout << " + ";
             }
         }
     } else {
-        std::vector<int> p(deg1);
-        std::vector<int> q(deg1 + deg2 + 1);
-        std::vector<int> r(deg2 + 1);
+        std::vector<int> q(deg1 - deg2 + 1);
 
         for (auto& it : q) {
             it = 0;
@@ -137,7 +134,6 @@ int main() {
                 }
             }
             degp = max;
-            std::cout << "degp " << degp << std::endl;
             if (degp < deg2) {
                 break;
             }
@@ -167,14 +163,6 @@ int main() {
                 }
             }
         }
-//        for (size_t i = 0; i < res.size(); ++i) {
-//            if (res[i] != 0) {
-//                std::cout << res[i] << "*X" << i;
-//                if ((i + 1) < res.size()) {
-//                    std::cout << " + ";
-//                }
-//            }
-//        }
 
     }
     return 0;

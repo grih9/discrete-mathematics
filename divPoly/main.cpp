@@ -97,7 +97,7 @@ int main() {
         std::cout << std::endl;
         std::cout << "RESULT: \n";
         std::cout << "q = " << q[0];
-        std::cout << "\np = ";
+        std::cout << "\nr = ";
         for (size_t i = 0; i < polynom1.size(); ++i) {
             std::cout << polynom1[i] << "*X^" << i;
             if ((i + 1) < polynom1.size()) {
@@ -106,34 +106,23 @@ int main() {
         }
     } else {
         std::vector<int> q(deg1 - deg2 + 1);
-
         for (auto& it : q) {
             it = 0;
         }
-
         int degp = deg1;
 
         for (int k = 0; k <= deg1 - deg2; ++k) {
-            q[degp - deg2] = 1;
-
-            std::vector<int> tmp(degp + deg2 + 1);
-            for (auto& it : tmp) {
-                it = 0;
-            }
-
-            for (int i = 0; i <= degp - deg2; ++i) {
-                for (int j = 0; j <= deg2; ++j) {
-                    tmp[i + j] = tmp[i + j] ^ (q[i] * polynom2[j]);
-                }
-            }
+            int offset = degp - deg2;
+            q[offset] = 1;
             int max = 0;
-            for (int i = 0; i <= degp; ++i) {
-                polynom1[i] ^= tmp[i];
-                if ((polynom1[i] == 1) && (max < i)) {
-                    max = i;
+            for (int i = 0; i <= deg2; ++i) {
+                polynom1[i + offset] ^= polynom2[i];
+                if ((polynom1[i + offset] == 1) && (max < i + offset)) {
+                    max = i + offset;
                 }
             }
             degp = max;
+            std::cout << degp;
             if (degp < deg2) {
                 break;
             }
@@ -150,7 +139,7 @@ int main() {
                 }
             }
         }
-        std::cout << "\np = ";
+        std::cout << "\nr = ";
         if (degp == deg2) {
             std::cout << 0;
         } else {

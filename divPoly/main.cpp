@@ -140,7 +140,7 @@ int main() {
             }
         }
         std::cout << "\nr = ";
-        if (degp == deg2) {
+        if (degp == 0) {
             std::cout << 0;
         } else {
             for (size_t i = 0; i < polynom1.size(); ++i) {
